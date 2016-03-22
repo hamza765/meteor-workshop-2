@@ -1,7 +1,7 @@
 #Making an event registration and checking system using Meteor
 
 ##0. What is Meteor?
-Meteor is a framework that allows you to quickly create real-time websites, web apps, mobile apps, and more all using full stack JavaScript!
+Meteor is a platform that allows you to quickly create real-time websites, web apps, mobile apps, and more all using full stack JavaScript!
 
 ##1. Installing Meteor
 
@@ -9,7 +9,7 @@ Just go to https://www.meteor.com/install and follow the instructions!
 
 ##2. Hello World
 ###Creating your first app
-Let's create our first app in Meteor! To save time, let's go ahead and name it 'hackathon-system' so we can recycle the project when we're done. 
+Let's create our first app in Meteor! To save time, let's go ahead and name it 'hackathon-system' so we can recycle the project when we're done.
 
 To create a new app in Meteor, just open up your Terminal or Powershell and type the following:
 `meteor create hackathon-system`
@@ -34,7 +34,7 @@ Once it's done loading, visit http://localhost:3000 and you'll see a screen like
 
 <img src="https://i.imgur.com/jH7tvVX.png">
 
-Click the `Click Me` button and you'll notice the number increments. There's nothing really magical about this, this is just the Blaze templating engine doing some basic JavaScript. 
+Click the `Click Me` button and you'll notice the number increments. There's nothing really magical about this, this is just the Blaze templating engine doing some basic JavaScript.
 
 ##3. Setting up the view
 
@@ -72,7 +72,7 @@ Now we define the template's content:
 </template>
 ```
 
-In short, what we just did was have the template display the status, name, and email of the attendee, wrapped within a div container. 
+In short, what we just did was have the template display the status, name, and email of the attendee, wrapped within a div container.
 
 ###Displaying the template
 Now that we have the template, we need to tell the view to display the template for every attendee that exists. We do this by adding the following before the header we made earlier:
@@ -86,7 +86,7 @@ Now that we have the template, we need to tell the view to display the template 
 ```
 
 ###Sample Data
-Now if you load up the app, you'll notice that it's empty! Why? because there's no attendees to pull from! Let's go ahead and add some attendees. We'll just hardcode this into the client for now. 
+Now if you load up the app, you'll notice that it's empty! Why? because there's no attendees to pull from! Let's go ahead and add some attendees. We'll just hardcode this into the client for now.
 
 Open up your `hackathon-system.js` file and add delete everything inside the `if (meteor.isClient) {...}` brackets.
 
@@ -113,7 +113,7 @@ You have successfully displayed your attendees using Blaze! Now let's make it pr
 
 ##5. Making it prettier
 ###Installing Bootstrap
-One of the easiest ways to get your apps looking decent quickly is to use a front-end framework called Bootstrap. In order for us to use Bootstrap, you'll get to witness the magic of the Meteor package system. 
+One of the easiest ways to get your apps looking decent quickly is to use a front-end framework called Bootstrap. In order for us to use Bootstrap, you'll get to witness the magic of the Meteor package system.
 
 All you have to do to install Bootsrap into Meteor is type this into your console:
 `meteor add twbs:bootstrap`
@@ -121,7 +121,7 @@ All you have to do to install Bootsrap into Meteor is type this into your consol
 That's it!
 
 ###Adding some formatting and classes
-In order to style and structure a view properly, you need to use classes. 
+In order to style and structure a view properly, you need to use classes.
 
 Let's wrap everything inside the body with a `<div>` that has the Bootstrap `container` class. What this class will do is wrap what we have into a padded container. The result should look similar to this:
 
@@ -150,7 +150,7 @@ These classes basically defines the `<div>` as a container that determines how w
 
 Now we need to wrap everything we have with a `<div>` that will act as the styling layer of the card:
 
-``` 
+```
 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
 	<div class="card">
 		...
@@ -169,7 +169,7 @@ Now to finish off the attendee grid, we need to go back into our body and edit t
 </div>
 ```
 
-Now if you look at the page, you'll notice that the attendees will be aligned and spaced out, but they don't quite look like cards yet. 
+Now if you look at the page, you'll notice that the attendees will be aligned and spaced out, but they don't quite look like cards yet.
 
 ###Adding some custom styling
 Let's add some basic custom styling to make the attendees look like cards. Open up your `hackthon-system.css` file and type the following:
@@ -293,16 +293,16 @@ Template.body.events({
 	"submit .register": function (event) {
 		//Prevent the page from reloading
 		event.preventDefault();
-			
+
 		var name = event.target.name.value;
 		var email = event.target.email.value;
-			
+
 		Attendees.insert({
 			name: name,
 			email: email,
 			status: 'Registered'
 		})
-		
+
 		//Clear the text boxes
 		event.target.name.value = "";
 		event.target.email.value = "";
@@ -310,14 +310,14 @@ Template.body.events({
 })
 ```
 
-This code will take what's inputed in the textboxes and create a new registered attendee in the database. 
+This code will take what's inputed in the textboxes and create a new registered attendee in the database.
 
 Try to add someone! You'll notice that person will instantly show up on the screen and in the database.
 
 ###Basic Validation
 Wait a minute, if you try to add someone with a blank field, it works. You can also add duplicate people. We should check to see if the fields are blank and if the email already exists.
 
-Checking if fields are empty is actually really easy to do. All you have to do is wrap the insert and clear text code with a conditional that checks if the value of the fields are empty. 
+Checking if fields are empty is actually really easy to do. All you have to do is wrap the insert and clear text code with a conditional that checks if the value of the fields are empty.
 
 ```
 if (name !== "" && email !== "") {
@@ -326,7 +326,7 @@ if (name !== "" && email !== "") {
 	  email: email,
 	  status: 'Registered'
 	})
-	
+
 	event.target.name.value = "";
 	event.target.email.value = "";
 }
@@ -344,7 +344,7 @@ if (Attendees.find({ email: email }).count() > 0) {
 All we do is search for attendees with the same email and get a count of how many matches there are.
 
 ##7. Checking someone in
-Now that registration is working, and we have some basic validation, let's get someone checked in. 
+Now that registration is working, and we have some basic validation, let's get someone checked in.
 
 How about rather than making a separate button to check someone in, you just click their status to check in and out!
 
@@ -366,7 +366,7 @@ Now click the statuses and you'll notice they'll toggle! Pretty easy eh?
 
 ##9. Hiding checked-in people
 
-What if we want to hide the attendees that are checked in? 
+What if we want to hide the attendees that are checked in?
 
 Let's add a checkbox below our form:
 
@@ -375,7 +375,7 @@ Let's add a checkbox below our form:
 <label for="toggle-checked-in">Toggle checked in</label>
 ```
 
-What this checkbox will do is set its checked state to the `hideCheckedIn` session variable. 
+What this checkbox will do is set its checked state to the `hideCheckedIn` session variable.
 
 Now, let's add the logic. Add another event, this time for the `change` event on the checkbox:
 
